@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Check for Tor</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $("#PrivacyBox").ready(function() {
+                function anonymous(value) {
+                    var box = $('#PrivacyBox');
+                    if (value) {
+                        //box.children("#image").addClass("anonymous");
+                        box.children("#image").replaceWith('<img src="anonymous.png"/>');
+                        box.children("#status").replaceWith('<p id="status">Anonymous</p>');
+                    } else {
+                        //box.children("#image").addClass("notanonymous");
+                        box.children("#image").replaceWith('<img src="notanonymous.png"/>');
+
+                        box.children("#status").replaceWith('<p id="status">Not Anonymous</p>');
+                    }
+                }
+                if ( $.cookie('privacystatus') ){
+                    console.log("hehe");
+                    if ($.cookie('privacystatus') == "True") {
+                        anonymous(true);
+                    } else {
+                        anonymous(false);
+                    }
+                } else {
+                    $.getJSON('http://server.globaleaks.org/torcheck.php?callback=?', function(data) {
+                        if (data.Tor) {
+                            anonymous(data.Tor);
+                            $.cookie('privacystatus', 'True', { expires: 1, path: '/' });
+                        } else {
+                            anonymous(data.Tor);
+                            $.cookie('privacystatus', 'False', { expires: 1, path: '/' });
+                        }
+                    });
+                }
+            });
+        });
+</script>
+</head>
+<body>
+<div id="PrivacyBox">
+    <div id="image"></div>
+    <p id="status"></p>
+</div>
+</body>
+
+</html>
+
