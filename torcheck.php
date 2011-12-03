@@ -49,21 +49,20 @@ class TorCheck
 
 }
 
-$ip = "10.10.1.1";
+# $ip = "10.10.1.1";
 # Instantiate with local for local file retrieval
 # Default method
 $tor = new TorCheck("localsh");
 
-/* $ip = $_SERVER['REMOTE_ADDR'];
+$ip = $_SERVER['REMOTE_ADDR'];
 
 if($_GET['callback']) {
     $result = array("Tor" => $tor->check($ip));
     echo $_GET['callback'] . '(' . json_encode($result) . ');';
 }
 
-*/
 
-
+/*
 if($tor->check($ip)) {
     echo "You are using Tor\n";
 } else {
@@ -73,6 +72,7 @@ if($tor->check($ip)) {
     echo "You are not using Tor\n";
     }
 }
+*/
 
 
 ?>
