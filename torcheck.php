@@ -53,7 +53,7 @@ $tor = new TorCheck("local");
 $ip = $_SERVER['REMOTE_ADDR'];
 $callback = $_GET['callback'];
 
-if(!preg_match("/^[a-z0-9]+$/i", $callback)) {
+if(!preg_match("/^[a-z0-9&_=]+$/i", $callback)) {
     echo ":P...";
     exit;
 } else {
