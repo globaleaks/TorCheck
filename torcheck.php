@@ -4,8 +4,8 @@ error_reporting(E_ALL);
 class TorCheck
 {
 
-    public $ip_list_exit_file = "Tor_ip_list_EXIT.csv";
-    public $ip_list_exit_local = "~/.tor/cached-consensus";
+    public $ip_list_exit_file = "/tmp/Tor_ip_list_EXIT.csv";
+    public $ip_list_exit_local = "/var/lib/tor/cached-consensus";
     public $ip_list_exit_url = "http://torstatus.blutmagie.de/ip_list_exit.php/Tor_ip_list_EXIT.csv";
     public $expiry = 3600;
     public $fetchmethod = "local";
@@ -48,7 +48,7 @@ class TorCheck
 # $ip = "10.10.1.1";
 # Instantiate with local for local file retrieval
 # Default method
-$tor = new TorCheck("localsh");
+$tor = new TorCheck("local");
 
 $ip = $_SERVER['REMOTE_ADDR'];
 
