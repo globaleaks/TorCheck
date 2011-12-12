@@ -51,8 +51,12 @@ class TorCheck
 $tor = new TorCheck("local");
 
 $ip = $_SERVER['REMOTE_ADDR'];
+$callback = $_GET['callback'];
 
-if($_GET['callback']) {
+if(!preg_match("/^[a-z0-9]+$/i", $callback)) {
+    echo ":P...";
+    exit;
+} else {
     $result = array("Tor" => $tor->check($ip));
     echo $_GET['callback'] . '(' . json_encode($result) . ');';
 }
