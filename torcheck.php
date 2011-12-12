@@ -17,10 +17,7 @@ class TorCheck
         }
 
         if ( $this->fetchmethod == "localsh" ) {
-            system("cat ".$this->ip_list_exit_local."| grep \"^s Exit\" -B1 | grep \"^r \" | cut -d ' ' -f7", $ret);
-            $fp = fopen($this->ip_list_exit_file, 'w');
-            fwrite($fp, $ret);
-            fclose($fp);
+            system("cat ".$this->ip_list_exit_local."| grep \"^s Exit\" -B1 | grep \"^r \" | cut -d ' ' -f7 > ".$this->ip_list_exit_file, $ret);
 
         } else {
         if (
@@ -29,13 +26,12 @@ class TorCheck
             ) {
             file_put_contents($this->ip_list_exit_file, file_get_contents($this->ip_list_exit_url));
         }
-
+        }
         $exit_list = file($this->ip_list_exit_file);
 
         foreach ($exit_list as $ip) {
             array_push($this->exit_list, trim($ip));
         }
-    }
     }
 
     function check($ip) {
